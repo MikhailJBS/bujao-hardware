@@ -31,8 +31,28 @@ Setelah itu saya menambahkan `*` pada `ALLOWED_HOSTS` di `settings.py` untuk men
 ```bash
 > python manage.py startapp main
 ```
-Dan perintah ini akan membentuk direktori baru bernama `main` yang merupakan direktori aplikasi main. Setelah itu saya mendaftarkan aplikasi `main` ke dalam proyek dengan cara menambahkan nama aplikasi yang diinginkan, dalam kasus ini `main` kepada variabel `INSTALLED_APPS` dalam `settings.py` yang ada di dalam direktori `bujao_Hardware`
-3. 
+Dan perintah ini akan membentuk direktori baru bernama `main` yang merupakan direktori aplikasi main.
+
+3. Saya mendaftarkan aplikasi `main` ke dalam proyek dengan cara menambahkan nama aplikasi yang diinginkan, dalam kasus ini `main` kepada variabel `INSTALLED_APPS` dalam `settings.py` yang ada di dalam direktori `bujao_Hardware` agar proyek dapat menjalankan aplikasi `main`
+
+4. Setelah itu saya beralih untuk membuat model pada aplikasi `main` dengan nama `Item` dan memiliki beberapa atribut seperti: `name` dengan tipe `CharField`, `amount` dengan tipe `IntegerField`, `description` dengan tipe `TextField`, `price` dengan tipe `IntegerField`, dan `tier` dengan tipe `TextField`. Dengan itu, model `Item` akan mempunyai semua atribut itu dengan tipe data yang telah ditentukan.
+
+5. Saya membuat fungsi pada `views.py` yang bernama `show_main` yang berfungsi untuk mengembalikan konten di dalamnya (pada kasus ini, nama dan kelas saya) ke dalam sebuah tempalte HTML.
+
+6. Selanjutnya saya membuat file `urls.py` dalam direktori `main` yang berisi `app_name` untuk nama aplikasi `main` dan mengutilisasi fungsi `show_main` dari modul `main.views` sebagai tampilan ketika URL diakses dengan cara menambahkan path URL sesuai yang saya tambahkan tadi yakni,
+
+```bash
+path('main/', include('main.urls')),
+```
+Ke dalam variabel `urlpatterns` di file `urls.py` dalam direktori proyek. Dengan ini saya berhasil routing rute URL proyek ke main, path URL `'main/` akan dialihkan ke rute yang ada dalam berkas `urls.py` di main
+
+7.  Setelah melakukan pengetesan dan pengecekan akhir untuk melihat apakah tampilan `localhost/main` sesuai harapan, saya melakukan push direktori lokal proyek `bujao_Hardware` ke repository github dengan nama yang sama. Setelah itu saya membuat aplikasi baru di `Adaptable` dan memilih branch `main` dari repository `bujao-hardware` sebagai repository app nya. Saya melakukan beberapa pengaturan seperti memilih deploy template `Python App Template` dan database type `PostgreSQL`. Selain itu saya mengatur versi `python` ke 3.10 dan menuliskan start command sebagai berikut,
+
+```bash
+python manage.py migrate && gunicorn bujao_Hardware.wsgi
+```
+Setelah semua proses itu selesai, saya deploy proyek saya dengan tautan [bujaohardware.adaptable.app][link-adaptable]
+
 ### Nomor 2.
 **Berikut adalah bagan yang telah saya buat:**
 
