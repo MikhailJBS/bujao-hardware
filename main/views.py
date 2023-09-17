@@ -27,6 +27,11 @@ def create_item(request):
     context = {'form': form}
     return render(request, "create_item.html", context)
 
+def delete_item(request, id):
+    item = Item.objects.get(pk=id)
+    item.delete()
+    return HttpResponseRedirect(reverse('main:show_main'))
+
 def show_xml(request):
     data = Item.objects.all()
     return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
