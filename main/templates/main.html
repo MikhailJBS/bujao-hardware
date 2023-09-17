@@ -1,6 +1,43 @@
-<h1>Welcome to Bujao Hardware!</h1>
+{% extends 'base.html' %}
 
-<h5>Name: </h5>
-<p>{{ my_name }}<p>
-<h5>Class: </h5>
-<p>{{ my_class }}<p>
+{% block content %}
+    <h1>Welcome to Bujao Hardware!</h1>
+
+    <img src=https://i.imgur.com/OoEWNCk.jpg alt="bujao" >
+    <img src=https://i.imgur.com/OMf6Yk5.jpg alt="hardware" >
+
+    <h5>Name:</h5>
+    <p>{{name}}</p>
+
+    <h5>Class:</h5>
+    <p>{{class}}</p>
+
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Tier</th>
+            <th>Price</th>
+            <th>Amount</th>
+            <th>Description</th>
+        </tr>
+    
+        {% for item in items %}
+            <tr>
+                <td>{{item.name}}</td>
+                <td>{{item.tier}}</td>
+                <td>{{item.price}}</td>
+                <td>{{item.amount}}</td>
+                <td>{{item.description}}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    
+    <br />
+    
+    <a href="{% url 'main:create_item' %}">
+        <button>
+            Add New Item
+        </button>
+    </a>
+
+{% endblock content %}
