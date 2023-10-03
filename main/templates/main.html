@@ -1,53 +1,88 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block content %}
-    <h1>Welcome to Bujao Hardware!</h1>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand mx-2" href="#" style="font-size: 35px; color: white;">Bujao Hardware</a>
 
-    <img src=https://i.imgur.com/OoEWNCk.jpg alt="bujao" >
-    <img src=https://i.imgur.com/OMf6Yk5.jpg alt="hardware" >
+        <div class="collapse navbar-collapse justify-content-center align-items-center" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <span class="navbar-text" style="font-size: 20px; color: white;">
+                        Welcome, {{ name }} (Class: {{ class }})
+                    </span>
+                </li>
+            </ul>
+        </div>
+        
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="btn btn-outline-danger mx-2" href="{% url 'main:logout' %}">
+                    Logout
+                </a>
+            </li>
+        </ul>
+    </nav>
 
-    <h5>Name:</h5>
-    <p>{{name}}</p>
+    <div class="container mt-4">
+        <h1>Welcome to Bujao Hardware!</h1>
 
-    <h5>Class:</h5>
-    <p>{{class}}</p>
+        <!--<img src=https://i.imgur.com/OoEWNCk.jpg alt="bujao" >
+        <img src=https://i.imgur.com/OMf6Yk5.jpg alt="hardware" >-->
 
-    <p></p><strong>Kamu menyimpan {{ items|length }} item kepada Bujao</strong></p>
+        <h5>Name:</h5>
+        <p>{{ name }}</p>
 
-    <table>
-        <tr>
-            <th>Name</th>
-            <th>Tier</th>
-            <th>Price</th>
-            <th>Amount</th>
-            <th>Description</th>
-        </tr>
-    
-        {% for item in items %}
-            <tr>
-                <td>{{item.name}}</td>
-                <td>{{item.tier}}</td>
-                <td>{{item.price}}</td>
-                <td>{{item.amount}}</td>
-                <td>{{item.description}}</td>
-            </tr>
-        {% endfor %}
-    </table>
-    
-    <br />
-    
-    <a href="{% url 'main:create_item' %}">
-        <button>
+        <h5>Class:</h5>
+        <p>{{ class }}</p>
+
+        <p><strong>We currently have {{ items|length }} items for sale!</strong></p>
+
+        <table class="table table-bordered table-striped"> <!-- Menambahkan kelas table-striped -->
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Tier</th>
+                    <th>Price</th>
+                    <th>Amount</th>
+                    <th>Description</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                    <tr class="{% if forloop.last %}last-row{% endif %}">
+                        <td>{{ item.name }}</td>
+                        <td>{{ item.tier }}</td>
+                        <td>{{ item.price }}</td>
+                        <td>{{ item.amount }}</td>
+                        <td>{{ item.description }}</td>
+                        <td>
+                            <a href="{% url 'main:edit_item' item.pk %}" class="btn btn-primary">
+                                Edit
+                            </a>
+                            <a href="{% url 'main:delete_item' item.pk %}" class="btn btn-danger">
+                                Delete
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+        <br />
+        
+        <a href="{% url 'main:create_item' %}" class="btn btn-warning">
             Add New Item
-        </button>
-    </a>
+        </a>
 
-    <a href="{% url 'main:logout' %}">
-        <button>
-            Logout
-        </button>
-    </a>
+        <h5>Sesi terakhir login: {{ last_login }}</h5>
+    </div>
 
-    <h5>Sesi terakhir login: {{ last_login }}</h5>  
-
+    <style>
+        .last-row {
+            background-color: #ffcccc;
+        }
+    </style>
 {% endblock content %}

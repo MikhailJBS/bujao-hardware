@@ -397,6 +397,118 @@ class Item(models.Model):
 ![alt text](https://i.imgur.com/ImZTZZp.png) <br>
 Dapat kita lihat bahwa pada bagian paling bawah terlihat kapan akun dengan nama Mikhail terakhir login pada aplikasi web ini. Dan dibawah nama juga terlihat nama akun yang `last_login` jadi tidak perlu login ulang lagi sampai kita logout manual, hal ini bisa dilakukan dengan mengutiliasai `cookies` `last_login` pada aplikasi web ini.
 
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+# Tugas 5 PBP 2023/2024
+* Nama: Mikhail Haritz
+* NPM: 2206082764
+* Kelas: PBP-F
+
+## Manfaat dari setiap element selector dan kapan waktu yang tepat untuk menggunakannya.
+Element selector dalam CSS digunakan untuk memilih elemen-elemen HTML tertentu yang ingin diatur tampilannya. Berikut adalah beberapa element selector umum digunakan:
+<br>
+<br>
+1. Selector Universal `*`<br>
+Fungsi dari selector ini adalah untuk memilih semua elemen di halaman. Biasanya digunakan untuk memberikan gaya dasar, tetapi sebaiknya digunakan dengan bijak karena dapat memengaruhi kode.
+
+2. Selector Tag `<p>`, `<h1>`,`<div>`<br>
+Memilih semua elemen dengan tag HTML tertentu. Cocok digunakan untuk mengatur gaya dasar elemen-elemen HTML. Umum digunakan secara luas dalam pembuatan tata letak.
+
+3. Selector Class `.classname` <br>
+Digunakan untuk memilih elemen-elemen dengan kelas tertentu. Digunakan untuk menggabungkan elemen-elemen yang memiliki fungsi atau styling yang sama. Cocok untuk menyusun gaya khusus bagi elemen dengan kelas tertentu.
+
+4. Selector ID `#idname` <br>
+Digunakan untuk memilih elemen dengan ID tertentu. Cocok untuk mengatur gaya khusus untuk elemen dengan ID tertentu. Umumnya digunakan untuk menerapkan styling atau perilaku JavaScript khusus pada elemen tersebut.
+
+5. Selector Pseudo-class `:pseudo-class` <br>
+Memilih elemen berdasarkan keadaan atau interaksi pengguna, seperti `:hover`, `:active`, `:focus`, dll. Biasanya digunakan untuk mengatur gaya khusus untuk elemen yang sedang diinteraksikan oleh pengguna.
+
+3. Selector Pseudo-element `::pseudo-element` <br>
+Memilih bagian khusus dari elemen, seperti `::before`, `::after`, `::first-line`, dll. Digunakan untuk mengatur gaya khusus untuk bagian-bagian elemen tertentu.
+
+7. Selector Kombinasi <br>
+Memilih elemen berdasarkan hubungan atau konteks mereka dalam dokumen, seperti `element1 element2`, `element1 > element2`, `element1 + element2`, dll. Digunakan untuk menargetkan elemen-elemen yang memiliki hubungan tertentu dalam tata letak halaman.
+
+8. Selector Atribut `[attribute]`, `[attribute=value]`, `[attribute~=value]`, dll. <br>
+Memilih elemen berdasarkan atribut HTML mereka. Digunakan untuk menargetkan elemen-elemen yang memiliki atribut tertentu atau nilai atribut tertentu.
+
+## HTML5 Tag
+HTML5 adalah versi terbaru dari HTML yang mendukung fitur-fitur baru untuk memperluas kemampuan bahasa HTML dan memberikan struktur yang lebih baik untuk menggambarkan konten web. Berikut adalah beberapa tag HTML5 yang sering digunakan:
+<br>
+<br>
+1. `<header>` <br>
+Tag ini digunakan untuk menunjukkan bagian header dari halaman web. Biasanya berisi judul, logo, dan navigasi utama. Tag ini biasanya digunakan di bagian atas halaman web.
+
+2. `<nav>` <br>
+Tag ini digunakan untuk menunjukkan bagian navigasi dari halaman web. Biasanya berisi tautan ke halaman lain di situs web. Tag ini biasanya digunakan di bagian atas halaman web.
+
+3. `<section>` <br>
+Tag ini digunakan untuk menunjukkan bagian utama dari halaman web. Biasanya berisi konten utama dari halaman web. Tag ini biasanya digunakan di bagian tengah halaman web.
+
+4. `<article>` <br>
+Tag ini digunakan untuk menunjukkan bagian artikel dari halaman web. Biasanya berisi konten yang berdiri sendiri, seperti posting blog, artikel berita, dll. Tag ini biasanya digunakan di bagian tengah halaman web.
+
+5. `<aside>` <br>
+Tag ini digunakan untuk menunjukkan bagian samping dari halaman web. Biasanya berisi konten yang terkait dengan konten utama, seperti daftar tautan, iklan, dll. Tag ini biasanya digunakan di bagian samping halaman web.
+
+6. `<footer>` <br>
+Tag ini digunakan untuk menunjukkan bagian footer dari halaman web. Biasanya berisi informasi kontak, tautan ke halaman lain, dll. Tag ini biasanya digunakan di bagian bawah halaman web.
+
+7. `<video>` <br>
+Tag ini digunakan untuk menampilkan video di halaman web. Tag ini biasanya digunakan untuk menampilkan video yang terkait dengan konten halaman web.
+
+8. `<audio>` <br>
+Tag ini digunakan untuk menampilkan audio di halaman web. Tag ini biasanya digunakan untuk menampilkan audio yang terkait dengan konten halaman web.
+
+9. `<canvas>` <br>
+Tag ini digunakan untuk membuat grafik dan animasi di halaman web. Tag ini biasanya digunakan untuk membuat grafik dan animasi yang terkait dengan konten halaman web.
+
+10. `<svg>` <br>
+Tag ini digunakan untuk membuat grafik vektor di halaman web. Tag ini biasanya digunakan untuk membuat grafik vektor yang terkait dengan konten halaman web.
+
+## Perbedaan antara margin dan padding.
+* **Margin** <br>
+Margin adalah ruang di luar elemen, di antara elemen dan elemen lain di sekitarnya. Margin berpengaruh pada ruang antara elemen dengan elemen tetangganya atau elemen luar terdekat. Margin biasanya digunakan untuk mengatur jarak antara elemen-elemen, membuat elemen terpisah dari elemen lain, atau mengontrol tata letak secara keseluruhan.
+
+* **Padding** <br>
+Padding adalah ruang di dalam elemen, di antara elemen dan konten di dalamnya. Padding memengaruhi tata letak elemen itu sendiri dan tidak memiliki dampak pada elemen-elemen lain di sekitarnya. Padding Biasanya digunakan untuk mengatur jarak antara konten elemen dan batas elemen tersebut, sehingga mempengaruhi tampilan dan tata letak konten dalam elemen tersebut.
+
+## Perbedaan antara framework CSS Tailwind dan Bootstrap. Kapan sebaiknya kita menggunakan Bootstrap daripada Tailwind, dan sebaliknya?
+Tailwind CSS dan Bootstrap adalah dua kerangka kerja (framework) CSS yang digunakan untuk mempercepat pengembangan desain web. Mereka memiliki pendekatan dan filosofi yang berbeda, dan perbedaan utama antara keduanya adalah dalam gaya penulisan dan pendekatan penggunaan.
+
+* **Tailwind** <br>
+Tailwind CSS adalah pendekatan CSS utilitarian yang fokus pada penggunaan kelas-kelas kecil untuk menggabungkan gaya yang dibutuhkan secara langsung dalam HTML. Ini memberikan fleksibilitas tinggi tetapi memerlukan pembelajaran pola kelas yang cukup berbeda. Tailwind juga tidak menyediakan komponen UI yang siap pakai, tetapi menyediakan utilitas yang dapat digunakan untuk membuat komponen-komponen tersebut. Tailwind memungkinkan kustomisasi yang lebih dalam, tetapi memerlukan penulisan kode yang lebih banyak. Tailwind memiliki ukuran yang lebih kecil karena hanya menggunakan kelas-kelas yang diperlukan
+
+* **Bootstrap** <br>
+Bootstrap adalah kerangka kerja CSS yang lebih tradisional dengan gaya pra-didefinisi. Ini menggunakan kelas-kelas yang lebih deskriptif dan bawaan untuk mengatur tampilan elemen, ini memberikan konsistensi dan kemudahan penggunaan tetapi kurang fleksibel. Bootstrap juga menyediakan komponen-komponen UI yang siap pakai. Bootstrap memungkinkan kustomisasi, itu biasanya melibatkan penyesuaian variabel SASS atau LESS yang lebih dalam untuk mengubah warna, ukuran, dan komponen jadi tidak se flexible Tailwind. Bootstrap memiliki banyak class CSS bawaan yang menyebabkan ukurannya menjadi cenderung lebih besar dibanding Tailwind
+
+* **Kapan menggunakan Tailwind dan kapan menggunakan Bootstrap?** <br>
+<br>***Tailwind*** <br>
+Tailwind cocok digunakan untuk proyek-proyek yang membutuhkan fleksibilitas tinggi dan kustomisasi yang lebih dalam. Ini juga cocok untuk proyek-proyek yang membutuhkan tampilan yang unik dan tidak biasa. <br>
+<br>***Bootstrap*** <br>
+Bootstrap cocok digunakan untuk proyek-proyek yang membutuhkan konsistensi dan kemudahan penggunaan. Ini juga cocok untuk proyek-proyek yang membutuhkan tampilan yang umum dan biasa.
+
+
+## Penjelasan pengimplementasian checklist pada soal.
+1. Kustomisasi halaman login, register, dan tambah inventori semenarik mungkin. Pada tugas ini saya menggunakan framework CSS Bootstrap untuk kustomisasi halaman login, register, dan tambah inventori. Saya mendesain ketiga komponen tersebut agar mirip satu sama lain karena saya ingin menunjukan aspek kontinuitas dari desain web saya. Untuk membuatnya saya pertama tama menambahkan link dan script Bootstrap di `base.html`. Untuk login dan register saya menggunakan template yang sudah disediakan oleh Bootstrap, dan saya mengubahnya sedikit agar sesuai dengan kebutuhan saya. Untuk tambah inventori saya membuat template sendiri dengan menggunakan komponen Bootstrap. Untuk ketiga halaman ini saya mengedepankan aspek simplisitas dari desain web saya. Berikut adalah tampilan ketiga halaman tersebut:<br>
+<br>***Login***<br>
+![alt text](https://i.imgur.com/gl6aPBl.png) <br>
+<br>***Register***<br>
+![alt text](https://i.imgur.com/evVSFD8.png) <br>
+<br>***Tambah Inventori***<br>
+![alt text](https://i.imgur.com/7gnEuYb.png) <br>
+<br>
+<br>
+
+2. Kustomisasi halaman daftar inventori menjadi lebih berwarna maupun menggunakan apporach lain seperti menggunakan **Card**.  Saya mendesain halaman daftar inventori yang ada di `main.html` dengan menggunakan beberapa komponen Bootstrap seperti `stripped-table` dan beberapa button lain. Saya ingin membuat website yang terlihat simple tapi fungsional dengan menonjolkan beberapa fungsi penting dari website ini. Berikut adalah tampilan dari daftar inventori saya:<br>
+<br>***Daftar Inventori***<br>
+![alt text](https://i.imgur.com/er4JtQe.png) <br>
+
 
 <!-- Links -->
 [link-adaptable]: https://bujaohardware.adaptable.app/main
