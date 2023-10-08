@@ -1,11 +1,11 @@
-# **Link App Tugas: [bujaohardware.adaptable.app][link-adaptable]**
+# **Link App Tugas: [mikhail-haritz-tugas.pbp.cs.ui.ac.id][link-app]**
 
 # Tugas 2 PBP 2023/2024
 * Nama: Mikhail Haritz
 * NPM: 2206082764
 * Kelas: PBP-F
 
-## Tautan Adaptable
+## Tautan Aplikasi
 * Link: [mikhail-haritz-tugas.pbp.cs.ui.ac.id][link-app]
 
 ## Pertanyaan Tugas
