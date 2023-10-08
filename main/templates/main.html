@@ -39,36 +39,8 @@
 
         <p><strong>We currently have {{ items|length }} items for sale!</strong></p>
 
-        <table class="table table-bordered table-striped"> <!-- Menambahkan kelas table-striped -->
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Tier</th>
-                    <th>Price</th>
-                    <th>Amount</th>
-                    <th>Description</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for item in items %}
-                    <tr class="{% if forloop.last %}last-row{% endif %}">
-                        <td>{{ item.name }}</td>
-                        <td>{{ item.tier }}</td>
-                        <td>{{ item.price }}</td>
-                        <td>{{ item.amount }}</td>
-                        <td>{{ item.description }}</td>
-                        <td>
-                            <a href="{% url 'main:edit_item' item.pk %}" class="btn btn-primary">
-                                Edit
-                            </a>
-                            <a href="{% url 'main:delete_item' item.pk %}" class="btn btn-danger">
-                                Delete
-                            </a>
-                        </td>
-                    </tr>
-                {% endfor %}
-            </tbody>
+        <table id="item-table" class="table table-bordered table-striped"> <!-- Menambahkan kelas table-striped -->
+
         </table>
         
         <br />
@@ -76,13 +48,101 @@
         <a href="{% url 'main:create_item' %}" class="btn btn-warning">
             Add New Item
         </a>
-
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Add Item by AJAX
+        </button>
         <h5>Sesi terakhir login: {{ last_login }}</h5>
     </div>
 
-    <style>
-        .last-row {
-            background-color: #ffcccc;
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Add New Item</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="form" onsubmit="return false;">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="name" class="col-form-label">Name:</label>
+                            <input type="text" class="form-control" id="name" name="name"></input>
+                        </div>
+                        <div class="mb-3">
+                            <label for="tier" class="col-form-label">Tier:</label>
+                            <input type="text" class="form-control" id="tier" name="tier"></input>
+                        </div>
+                        <div class="mb-3">
+                            <label for="price" class="col-form-label">Price:</label>
+                            <input type="number" class="form-control" id="price" name="price"></input>
+                        </div>
+                        <div class="mb-3">
+                            <label for="amount" class="col-form-label">Amount:</label>
+                            <input type="number" class="form-control" id="amount" name="amount"></input>
+                        </div>
+                        <div class="mb-3">
+                            <label for="description" class="col-form-label">Description:</label>
+                            <textarea class="form-control" id="description" name="description"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="button_add" data-bs-dismiss="modal">Add Item</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function getItems() {
+            return fetch("{% url 'main:get_item_json' %}").then((res) => res.json())
         }
-    </style>
+
+        async function refreshItems() {
+            document.getElementById("item-table").innerHTML = ""
+            const items = await getItems()
+            let htmlString = `<tr>
+                <th>Name</th>
+                <th>Tier</th>
+                <th>Price</th>
+                <th>Amount</th>
+                <th>Description</th>
+                <th>Action</th>
+            </tr>`
+            items.forEach((item) => {
+                htmlString += `\n<tr>
+                    <td>${item.fields.name}</td>
+                    <td>${item.fields.tier}</td>
+                    <td>${item.fields.price}</td>
+                    <td>${item.fields.amount}</td>
+                    <td>${item.fields.description}</td>
+                    <td>
+                        <a href="edit-item/${item.pk}">
+                            <button class='btn btn-primary'>Edit</button>
+                        </a>
+                        <a href="delete-item/${item.pk}">
+                            <button class='btn btn-danger'>Delete</button>
+                        </a>
+                    </td>
+                </tr>`;
+            })
+            
+            document.getElementById("item-table").innerHTML = htmlString
+        }
+
+        function addItem(){
+            fetch("{% url 'main:add_item_ajax' %}", {
+                method: "POST",
+                body: new FormData(document.getElementById("form"))
+            }).then(refreshItems)
+
+            document.getElementById("form").reset();
+            return false;
+        }
+
+        
+        document.getElementById("button_add").onclick = addItem;
+        refreshItems();
+    </script>
 {% endblock content %}

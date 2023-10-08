@@ -509,6 +509,150 @@ Bootstrap cocok digunakan untuk proyek-proyek yang membutuhkan konsistensi dan k
 <br>***Daftar Inventori***<br>
 ![alt text](https://i.imgur.com/er4JtQe.png) <br>
 
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+# Tugas 6 PBP 2023/2024
+* Nama: Mikhail Haritz
+* NPM: 2206082764
+* Kelas: PBP-F
+
+## Perbedaan antara Asynchronous Programming dan Synchronous Programming
+* **Synchronous Programming:**<br> Pada synchronous programming, tugas-tugas dieksekusi secara berurutan, satu per satu. Setiap tugas harus menunggu tugas sebelumnya selesai sebelum dapat dijalankan. Ini berarti jika ada tugas yang memakan waktu lama, maka semua tugas berikutnya akan terhenti atau diblokir hingga tugas tersebut selesai.
+
+* **Asynchronous Programming:**<br> Asynchronous programming merupakan sebuah pendekatan pemrograman yang tidak terikat pada input output (I/O)  protocol. Ini menandakan bahwa pemrograman asynchronous tidak melakukan pekerjaannya secara old style / cara lama yaitu dengan eksekusi baris program satu persatu secara hirarki. Artinya, tugas-tugas dapat dijalankan secara bersamaan tanpa harus menunggu tugas sebelumnya selesai. Ini sangat berguna saat ada tugas yang memerlukan waktu lama, karena tugas lainnya tetap dapat berjalan tanpa terhenti.
+
+## Paradigma Event-Driven Programming pada JavaScript dan Contohnya dalam Tugas Ini
+Paradigma event-driven programming adalah pendekatan di mana program merespon peristiwa (event) yang terjadi. Program akan menjalankan fungsi tertentu ketika suatu event terjadi. Pada tugas ini, contoh penerapannya adalah penggunaan event listeners dalam JavaScript untuk merespons event seperti tombol diklik (misalnya, saat tombol "Add Item" diklik untuk membuka modal) yang dapat kita lihat pada kode dibawah ini:
+
+```
+function addItem(){
+    fetch("{% url 'main:add_item_ajax' %}", {
+        method: "POST",
+        body: new FormData(document.getElementById("form"))
+    }).then(refreshItems)
+
+    document.getElementById("form").reset();
+    return false;
+}
+
+
+document.getElementById("button_add").onclick = addItem;
+```
+
+Kode diatas akan menjalankan fungsi `addItem` ketika tombol dengan id `button_add` diklik. Fungsi ini akan mengambil data dari form dengan id `form` dan mengirimkannya ke server menggunakan `fetch`. Setelah itu, fungsi `refreshItems` akan dijalankan untuk memperbarui daftar item.
+
+## Penerapan Asynchronous Programming pada AJAX
+AJAX (Asynchronous JavaScript and XML) adalah teknologi yang memanfaatkan asynchronous programming untuk melakukan komunikasi antara browser dan server tanpa harus me-refresh seluruh halaman web. Saat melakukan permintaan AJAX (misalnya, permintaan GET atau POST), browser dapat melanjutkan menjalankan kode JavaScript lainnya tanpa harus menunggu respons dari server. Ketika respons dari server tiba, callback atau promise akan dijalankan untuk menangani data tersebut. Pada tugas ini, AJAX digunakan untuk mengirimkan data ke server dan memperbarui halaman web tanpa harus me-refresh seluruh halaman web. Contoh penerapannya adalah pada kode dibawah ini:
+
+```
+function addItem(){
+    fetch("{% url 'main:add_item_ajax' %}", {
+        method: "POST",
+        body: new FormData(document.getElementById("form"))
+    }).then(refreshItems)
+
+    document.getElementById("form").reset();
+    return false;
+}
+```
+
+## Bandingkan Fetch API dan jQuery untuk Penerapan AJAX
+* **Fetch API** <br>
+Ini adalah API bawaan JavaScript yang menyediakan cara yang kuat dan modern untuk melakukan permintaan HTTP secara asinkronus. Kelebihannya termasuk desain yang lebih modern, dukungan untuk Promise yang membuat penanganan error lebih baik, dan ringan karena tidak memerlukan dependensi tambahan. Fetch API lebih cocok untuk proyek-proyek yang lebih kecil dan ketika Anda ingin menghindari overhead dari pustaka pihak ketiga. Namun, Fetch API memiliki dukungan yang lebih rendah untuk browser lama dan tidak memiliki dukungan untuk JSONP. <br> <br>
+* **Jquery** <br>
+jQuery adalah pustaka JavaScript yang telah ada selama beberapa tahun dan memiliki dukungan untuk AJAX yang kuat. Kelebihannya termasuk kompatibilitas lintas-browser yang baik, sintaks yang sederhana, dan banyak plugin yang tersedia. Namun, jQuery memiliki ukuran yang lebih besar dan mungkin tidak diperlukan jika Anda hanya menggunakan fitur-fitur AJAX. jQuery lebih cocok untuk proyek-proyek yang lebih besar dan ketika Anda ingin menggunakan fitur lainnya seperti manipulasi DOM, animasi, dll. <br><br>
+
+Pilihan antara keduanya tergantung pada kebutuhan proyek. Untuk proyek-proyek kecil atau saat Anda ingin menghindari dependensi tambahan, Fetch API bisa menjadi pilihan yang baik. Namun, jika Anda bekerja dalam lingkungan yang sudah menggunakan jQuery atau memiliki kompatibilitas lintas-browser yang penting, maka jQuery masih bisa digunakan dengan baik. Yang terpenting adalah memahami prinsip-prinsip dasar AJAX dan asynchronous programming yang digunakan di kedua teknologi ini.
+
+## Penjelasan pengimplementasian checklist pada soal.
+### **1. Ubahlah kode tabel data item agar dapat mendukung AJAX GET dan melakukan pengambilan task menggunakan AJAX GET.**
+Untuk mengubah kode tabel data item agar dapat mendukung AJAX GET dan melakukan pengambilan task menggunakan AJAX GET, saya mengubah kode `main.html` dengan menghapus tabel yang telah didefinisikan sebelumnya secara synchronus, dan menggantinya dengan membuat tabel kosong dengan id `table_items` yang akan diisi dengan data dari server menggunakan AJAX pada `JavaScript`. Berikut adalah kode fungsi `refreshItems` yang akan mengambil data dari server dan memasukkannya ke dalam tabel:
+```
+async function getItems() {
+    return fetch("{% url 'main:get_item_json' %}").then((res) => res.json())
+}
+
+async function refreshItems() {
+    document.getElementById("item-table").innerHTML = ""
+    const items = await getItems()
+    let htmlString = `<tr>
+        <th>Name</th>
+        <th>Tier</th>
+        <th>Price</th>
+        <th>Amount</th>
+        <th>Description</th>
+        <th>Action</th>
+    </tr>`
+    items.forEach((item) => {
+        htmlString += `\n<tr>
+            <td>${item.fields.name}</td>
+            <td>${item.fields.tier}</td>
+            <td>${item.fields.price}</td>
+            <td>${item.fields.amount}</td>
+            <td>${item.fields.description}</td>
+            <td>
+                <a href="edit-item/${item.pk}">
+                    <button class='btn btn-primary'>Edit</button>
+                </a>
+                <a href="delete-item/${item.pk}">
+                    <button class='btn btn-danger'>Delete</button>
+                </a>
+            </td>
+        </tr>`;
+    })
+    
+    document.getElementById("item-table").innerHTML = htmlString
+}
+```
+### **2. Penerapan AJAX Post dengan sebuah modal berisi form untuk menambahkan suatu item baru.**
+Untuk penerapan AJAX Post dengan sebuah modal berisi form untuk menambahkan suatu item baru, saya membuat modal dengan id `modal_fade` yang akan muncul ketika tombol `Add Item by AJAX` diklik. Modal ini akan menampilkan form untuk menambahkan item baru dengan tampilan Pop-up seperti ini:
+![alt text](https://i.imgur.com/N8LxbF5.png) <br>
+
+Pada form modal tsb terdapat button `Add Item` yang akan mengirimkan data dari form tersebut ke server menggunakan AJAX. Berikut adalah kode fungsi `addItem` yang akan mengambil data dari form dan mengirimkannya ke server menggunakan AJAX:
+```
+function addItem(){
+    fetch("{% url 'main:add_item_ajax' %}", {
+        method: "POST",
+        body: new FormData(document.getElementById("form"))
+    }).then(refreshItems)
+
+    document.getElementById("form").reset();
+    return false;
+}
+```
+Kode diatas akan mengambil data dari form dengan id `form` dan mengirimkannya ke server menggunakan `fetch`. Setelah itu, fungsi `refreshItems` akan dijalankan untuk memperbarui daftar item. Kode itu juga memanggil url `main:add_item_ajax` yang akan memanggil fungsi `add_item_ajax` pada `views.py` untuk menambahkan item baru ke database. Berikut adalah kode fungsi `add_item_ajax` yang akan menambahkan item baru ke database:
+```
+@csrf_exempt
+def add_item_ajax(request):
+    if request.method == 'POST':
+        name = request.POST.get("name")
+        tier = request.POST.get("tier")
+        price = request.POST.get("price")
+        amount = request.POST.get("amount")
+        description = request.POST.get("description")
+        user = request.user
+
+        new_item = Item(name=name, tier=tier, price=price, amount = amount, description=description, user=user)
+        new_item.save()
+
+        return HttpResponse(b"CREATED", status=201)
+
+    return HttpResponseNotFound()
+```
+Lalu fungsi itu dihubungkan dengan url `main:add_item_ajax` pada `urls.py` dengan nama path `create-ajax/` seperti ini:
+```
+path('create-ajax/', add_item_ajax, name='add_item_ajax'),
+```
+Yang selanjutnya dihubungkan dengan button `Add Item` pada form modal seperti diatas tadi. Dengan begitu, ketika button `Add Item` diklik, data dari form akan dikirimkan ke server menggunakan AJAX dan item baru akan ditambahkan ke database. Setelah itu, daftar item akan diperbarui dengan menampilkan item baru tersebut.
+
+### **3. Melakukan perintah `collectstatic`**
+Perintah collectstatic digunakan untuk mengumpulkan semua file static yang dibutuhkan oleh aplikasi web ke satu folder. File-file tersebut nantinya akan digunakan oleh server untuk melayani permintaan dari client. Tujuan dari mengumpulkan file-file ini kedalam satu folder di root adalah agar folder yang berisi file-file tersebut dapat diakses dengan mudah. Cara melakukannya adalah dengan menjalankan perinaht `python manage.py collectstatic` pada terminal. Berikut adalah hasil dari perintah tersebut:
+![alt text](https://i.imgur.com/Pr9xpVq.png) <br>
 
 <!-- Links -->
 [link-adaptable]: https://bujaohardware.adaptable.app/main
