@@ -1,10 +1,12 @@
+# **Link App Tugas: [bujaohardware.adaptable.app][link-adaptable]**
+
 # Tugas 2 PBP 2023/2024
 * Nama: Mikhail Haritz
 * NPM: 2206082764
 * Kelas: PBP-F
 
 ## Tautan Adaptable
-* Link: [bujaohardware.adaptable.app][link-adaptable]
+* Link: [mikhail-haritz-tugas.pbp.cs.ui.ac.id][link-app]
 
 ## Pertanyaan Tugas
 1. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
@@ -655,4 +657,4 @@ Perintah collectstatic digunakan untuk mengumpulkan semua file static yang dibut
 ![alt text](https://i.imgur.com/Pr9xpVq.png) <br>
 
 <!-- Links -->
-[link-adaptable]: https://bujaohardware.adaptable.app/main
+[link-app]: mikhail-haritz-tugas.pbp.cs.ui.ac.id
