@@ -1,3 +1,4 @@
+import json
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from main.forms import ItemForm
@@ -15,6 +16,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponseNotFound
+from django.http import JsonResponse
 
 @login_required(login_url='/login')
 def show_main(request):
@@ -133,3 +135,28 @@ def ajax_delete_item(request, id):
     item = Item.objects.get(pk = id)
     item.delete()
     return HttpResponse(b"OK", status=200)
+
+@csrf_exempt
+def create_item_flutter(request):
+    if request.method == 'POST':
+        
+        data = json.loads(request.body)
+
+        new_item = Item.objects.create(
+            user = request.user,
+            name = data["name"],
+            tier = data["tier"],
+            price = int(data["price"]),
+            amount = int(data["amount"]),
+            description = data["description"]
+        )
+
+        new_item.save()
+
+        return JsonResponse({"status": "success"}, status=200)
+    else:
+        return JsonResponse({"status": "error"}, status=401)
+    
+def get_user_item_json(request):
+    data = Item.objects.filter(user=request.user)
+    return HttpResponse(serializers.serialize("json", data), content_type="application/json")
