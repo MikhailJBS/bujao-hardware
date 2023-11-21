@@ -157,6 +157,14 @@ def create_item_flutter(request):
     else:
         return JsonResponse({"status": "error"}, status=401)
     
+@csrf_exempt
 def get_user_item_json(request):
-    data = Item.objects.filter(user=request.user)
+    user = request.user
+    if user.is_authenticated:
+        data = Item.objects.filter(user=user)
+        # Rest of your code
+    else:   
+        # Handle the case when the user is not authenticated
+        data = []
+    
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
