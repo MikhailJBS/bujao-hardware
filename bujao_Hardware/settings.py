@@ -33,7 +33,7 @@ PRODUCTION = env.bool('PRODUCTION', False)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ['mikhail-haritz-tugas.pbp.cs.ui.ac.id', 'localhost', '127.0.0.1', '*']
 
 
 # Application definition
@@ -67,6 +67,9 @@ CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SAMESITE = 'None'
 SESSION_COOKIE_SAMESITE = 'None'
+CORS_ORIGIN_WHITELIST = [
+    'https://mikhail-haritz-tugas.pbp.cs.ui.ac.id',
+]
 
 ROOT_URLCONF = 'bujao_Hardware.urls'
 
